@@ -5,8 +5,6 @@ import model.entities.Instructor;
 import model.entities.Paciente;
 import model.entities.Usuario;
 
-
-
 import model.dao.InstructorDAO;
 
 public class UsuarioService {

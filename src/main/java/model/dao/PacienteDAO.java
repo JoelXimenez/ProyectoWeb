@@ -1,7 +1,11 @@
 package model.dao;
+
+import java.util.List;
+
 import model.entities.Paciente;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
+
 public class PacienteDAO extends GenericDAO<Paciente> {
     public PacienteDAO() {
         super(Paciente.class);
@@ -21,6 +25,17 @@ public class PacienteDAO extends GenericDAO<Paciente> {
         }
     }
 
+    public List<Paciente> findByInstructor(int idInstructor) {
+        try (EntityManager em = getEntityManager()) {
+            String jpql = "SELECT p FROM Paciente p WHERE p.instructor.idUsuario = :idInstructor";
+            return em.createQuery(jpql, Paciente.class)
+                    .setParameter("idInstructor", idInstructor)
+                    .getResultList();
+        } catch (Exception e) {
+            return List.of(); 
+        }
+    }
+
     @Override
     public boolean create(Paciente entity) {
 
@@ -28,3 +43,4 @@ public class PacienteDAO extends GenericDAO<Paciente> {
     }
 
 }
+

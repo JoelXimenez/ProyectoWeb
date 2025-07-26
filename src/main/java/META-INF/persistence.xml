@@ -9,16 +9,14 @@
 
 		
 		<properties>
-			<property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-			<property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/yoga"/>
-			<property name="jakarta.persistence.jdbc.user" value="root"/>
-			<property name="jakarta.persistence.jdbc.password" value=""/>
-			<property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
-			<property name="eclipselink.create-ddl-jdbc-file-name" value="create.sql"/>
-			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
-
-            <!-- Cambiar por el puerto de tu compu al xampp el 3306-->
-            <!-- En xampp crea una base de datos llamada 'yoga' -->
+			<property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://trolley.proxy.rlwy.net:10085/railway"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="QkcpWyAICQaxVPijaevrVoOxSHQCkSxu"/>
+			
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
 
 			<!--
             <property name="eclipselink.ddl-generation" value="none"/>

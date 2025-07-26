@@ -14,7 +14,7 @@ import model.entities.Instructor;
 import model.entities.Paciente;
 import model.service.PacienteService;
 
-@WebServlet("/PacientesController")
+@WebServlet("/GestionarPacienteController")
 public class GestionarPacienteController extends HttpServlet {
     
     @Serial
@@ -33,7 +33,7 @@ public class GestionarPacienteController extends HttpServlet {
     }
 
     private void router(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String route = (req.getParameter("route") != null) ? "listar" : req.getParameter("route");
+        String route = req.getParameter("route");
 
         switch (route) {
             case "guardar":
@@ -43,11 +43,30 @@ public class GestionarPacienteController extends HttpServlet {
             case "registrarPacienteFormulario":
                 this.registrarPacienteFormulario(resp);
                 break;
+            case "listarPacientes":
+            this.listarPacientes(req, resp);
+                break;         
         
         default:
                 throw new IllegalArgumentException("Ruta no encontrada: " + route);
         }
     }
+
+    private void listarPacientes(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Instructor instructor = (Instructor) session.getAttribute("usuario");
+        List<Paciente> pacientes;
+        try {
+            pacientes = new PacienteService().listarPorInstructor(instructor.getIdUsuario());
+            req.setAttribute("pacientes", pacientes);
+            req.getRequestDispatcher("jsp/gestionPacientes.jsp").forward(req, resp);
+            
+        } catch (SQLException e) {
+            throw new ServletException("Error al listar pacientes", e);
+            
+        }
+    }
+
 
     private void registrarPacienteFormulario(HttpServletResponse resp) throws IOException {
         resp.sendRedirect("jsp/registroPaciente.jsp");
@@ -57,7 +76,8 @@ public class GestionarPacienteController extends HttpServlet {
         Paciente paciente = parseAddressFromRequest(req);
         PacienteService pacienteService = new PacienteService();
         if (pacienteService.guardar(paciente)) {
-            req.setAttribute("mensaje", "Paciente registrado exitosamente");
+            resp.sendRedirect(req.getContextPath() + "/GestionarPacienteController?route=listarPacientes");
+
         } else {
             req.setAttribute("mensaje", "Error al registrar paciente");
         }
