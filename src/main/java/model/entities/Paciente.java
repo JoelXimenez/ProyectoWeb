@@ -10,10 +10,10 @@ import java.time.LocalDate;
         @AttributeOverride(name = "idUsuario", column = @Column(name = "idPaciente"))
 })
 public class Paciente extends Usuario {
-    @Column(name = "genero",unique = true)
+    @Column(name = "genero")
     protected String genero;
 
-    @Column(name = "fechaNacimiento",unique = true)
+    @Column(name = "fechaNacimiento")
     protected LocalDate fechaNacimiento;
 
     @ManyToOne
