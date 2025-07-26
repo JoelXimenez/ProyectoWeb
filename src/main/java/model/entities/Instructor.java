@@ -1,64 +1,32 @@
 package model.entities;
+import java.util.List;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
 
-public class Instructor implements Serializable{
+@Entity
+@AttributeOverrides({
+        @AttributeOverride(name = "idUsuario", column = @Column(name = "idInstructor"))
+})
+public class Instructor extends Usuario 
+{
+    private static final long serialVersionUID = 1L;
 
-	private String nombre;
-	private String id;
-	private String correo;
-	private String password;
-	private String telefono;
-	private byte[] documentoEspecialidad;
-	
-	public Instructor() {
-		
-	}
-	
-	public Instructor(String nombre, String id, String correo, String password, String telefono, byte[] documentoEspecialidad) {
-		super();
-		this.nombre = nombre;
-		this.id = id;
-		this.correo = correo;
-		this.password = password;
-		this.telefono = telefono;
-		this.documentoEspecialidad = documentoEspecialidad;
-	}
+    @OneToMany(mappedBy = "instructor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Paciente> pacientes;
 
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getCorreo() {
-		return correo;
-	}
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-	public byte[] getDocumentoEspecialidad() {
-		return documentoEspecialidad;
-	}
-	public void setDocumentoEspecialidad(byte[] documentoEspecialidad) {
-		this.documentoEspecialidad = documentoEspecialidad;
-	}
+    public Instructor() {}
+
+
+
+    public Instructor(int idUsuario, String cedula, String nombreCompleto, String correo, String contrasena,
+            String telefono) {
+        super(idUsuario, cedula, nombreCompleto, correo, contrasena, telefono);
+    }
+
+
+
+    public List<Paciente> getPacientes() {
+        return pacientes;
+    }
+
 }

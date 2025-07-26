@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Qwitcher+Grypen:wght@400;700&display=swap');
+
+/* ====== VARIABLES DE PALETA DE COLORES PERSONALIZADA ====== */
+:root {
+  --color1: #1f192f;
+  --color2: #2d6073;
+  --color3: #65b8a6;
+  --color4: #b5e8c3;
+  --color5: #f0f7da;
+}
+
+/* ====== ESTILOS GENERALES Y BASE ====== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  height: 100%;
+  background-color: var(--color5);
+}
+
+.fondo {
+  background: url('../assets/img/fondo.png') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  color: white;
+  display: flex;
+}
+
+.contenedor-izquierdo {
+  width: 50%;
+  min-width: 400px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.titulo-logo {
+  font-family: 'Qwitcher Grypen', cursive;
+  font-size: 3.5rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+}
+
+.contenedor-formulario {
+  background-color: rgba(31, 25, 47, 0.7);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.barra {
+  background-color: var(--color3);
+  padding: 0.6rem 2rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+
+.logo { height: 80px; margin-right: 80px;
+padding: 0px; margin-top: 0px; margin-bottom: 0px;}
+.marca {
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-family: 'Qwitcher Grypen', cursive;
+  color: white;
+  margin-right: auto;
+}
+
+.btn-cerrar-sesion {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.panel { display: flex; flex-grow: 1; }
+.menu-lateral {
+  width: 240px;
+  background-color: white;
+  padding: 1.5rem 0;
+  border-right: 1px solid var(--color3);
+}
+
+.btn-menu {
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-size: 0.95rem;
+  color: var(--color1);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 4px solid transparent;
+}
+
+.btn-menu:hover {
+  background-color: var(--color5);
+  color: var(--color2);
+}
+
+.btn-menu.activo {
+  background-color: var(--color4);
+  font-weight: 600;
+  color: var(--color2);
+  border-left: 4px solid var(--color3);
+}
+
+.contenido-panel {
+  flex: 1;
+  padding: 2rem;
+}
+
+.tarjeta {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.06);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-group { margin-bottom: 1rem; }
+.form-group label, .formulario label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color1);
+}
+
+.formulario-login .form-group label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.formulario input, .formulario select, .formulario textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  margin-bottom: 1rem;
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+  outline: 2px solid var(--color3);
+  border-color: var(--color3);
+  background-color: white;
+}
+
+.fila-doble { display: flex; gap: 1rem; }
+.fila-doble > * { flex: 1; }
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-primario {
+  background-color: var(--color3);
+  color: white;
+  border-color: var(--color3);
+}
+
+.fila-doble-rol {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fila-doble-rol .btn-rol {
+  flex: 1;
+}
+
+.btn-rol {
+  width: 100%;
+}
+
+.btn-primario:hover {
+  background-color: var(--color2);
+  border-color: var(--color2);
+}
+
+.btn-secundario {
+  background-color: transparent;
+  color: var(--color2);
+  border-color: #cbd5e1;
+}
+
+.btn-secundario:hover {
+  background-color: var(--color5);
+  border-color: var(--color2);
+  color: var(--color1);
+}
+
+.btn-grande-centro {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 2rem auto;
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  background-color: #65b8a6; 
+  color: #1f192f; 
+  border: 2px solid #2d6073; 
+  border-radius: 8px; 
+  text-align: center; 
+  font-weight: bold; 
+  transition: background-color 0.3s, transform 0.2s ease-in-out; 
+}
+
+.btn-grande-centro:hover {
+  background-color: #2d6073; 
+  color: #f0f7da; 
+  transform: scale(1.05); 
+}
+
+.btn-grande-centro:active {
+  transform: scale(1); 
+}
+
+.controles-sesion {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-gestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tabla-pacientes, .tabla-posturas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.tabla-pacientes th, .tabla-pacientes td,
+.tabla-posturas th, .tabla-posturas td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--color3);
+  text-align: left;
+}
+
+.tabla-pacientes th, .tabla-posturas th {
+  background-color: var(--color4);
+  font-weight: 600;
+  color: var(--color1);
+}
+
+.acciones-paciente, .acciones-postura {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.progreso-serie {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color1);
+  background-color: var(--color4);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.imagen-postura-grande {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+  background-color: #eee;
+  min-height: 300px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#timer-display {
+  font-size: 4rem;
+  font-weight: bold;
+  margin: 1rem 0;
+  color: var(--color3);
+}
+
+@media (max-width: 992px) {
+  .panel { flex-direction: column; }
+  .menu-lateral {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--color3);
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    flex-wrap: wrap;
+  }
+  .btn-menu {
+    width: auto;
+    border-radius: 6px;
+    margin: 0.2rem;
+    border-left: none;
+  }
+  .btn-menu.activo {
+    border-left: none;
+    background-color: var(--color3);
+    color: white;
+  }
+}
+
+@media (max-width: 768px) {
+  .contenido-panel, .tarjeta { padding: 1rem; }
+  .barra { padding: 0.8rem 1rem; flex-direction: column; gap: 0.5rem; }
+  .marca { margin-right: 0; }
+  .contenedor-izquierdo {
+    width: 100%;
+    min-width: unset;
+    padding: 1rem;
+    justify-content: flex-start;
+    margin-top: 1rem;
+  }
+  .contenedor-formulario { padding: 1.5rem; }
+  .titulo-logo { font-size: 2.8rem; }
+  .fila-doble { flex-direction: column; gap: 0; }
+  .tabla-pacientes, .tabla-posturas {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .imagen-postura-grande { min-height: 200px; }
+  #timer-display { font-size: 3.5rem; }
+  .controles-sesion {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .controles-sesion .btn {
+    width: 100%;
+    margin: 0.2rem 0;
+  }
+  .fondo { background-attachment: scroll; }
+}
