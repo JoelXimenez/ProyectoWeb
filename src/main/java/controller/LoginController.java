@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Serial;
 import java.time.LocalDate;
 
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +14,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.entities.Instructor;
 import model.entities.Paciente;
+import model.entities.Usuario;
 import model.service.PacienteService;
+import model.service.UsuarioService;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
@@ -39,8 +42,13 @@ public class LoginController extends HttpServlet {
             case "entrar":
                 this.entrar(resp);
                 break;
-        
-        default:
+            case "login":
+                this.login(req, resp);
+                break;
+            case "logOut":
+                this.logOut(req, resp);
+                break;
+            default:
                 throw new IllegalArgumentException("Ruta no encontrada: " + route);
         }
     }
@@ -48,5 +56,40 @@ public class LoginController extends HttpServlet {
     private void entrar(HttpServletResponse resp) throws IOException {
         resp.sendRedirect("jsp/inicioSesion.jsp");
     }
-    
+
+    private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String correo = req.getParameter("correo");
+        String contrasena = req.getParameter("contrasena");
+        String rol = req.getParameter("rol");
+
+        UsuarioService userService = new UsuarioService();
+        Usuario usuario = userService.authenticate(correo, contrasena, rol);
+
+        if (usuario != null) {
+            HttpSession session = req.getSession();
+            session.setAttribute("usuario", usuario);
+            req.setAttribute("messageType", "info");
+            req.setAttribute("message", "Login successful! Welcome to your dashboard.");
+
+            if (usuario instanceof Instructor) {
+                resp.sendRedirect(req.getContextPath() + "/jsp/dashboard.jsp");
+            } else if (usuario instanceof Paciente) {
+                resp.sendRedirect(req.getContextPath() + "/jsp/dashboardPaciente.jsp");
+            }
+        } else {
+            req.setAttribute("messageType", "error");
+            req.setAttribute("message", "Invalid credentials. Please try again.");
+            req.getRequestDispatcher("jsp/login.jsp").forward(req, resp);
+        }
+    }
+
+    private void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.invalidate(); // Cierra la sesión actual
+        }
+        
+        resp.sendRedirect(req.getContextPath() + "/jsp/inicioSesion.jsp");
+    }
+
 }
