@@ -20,6 +20,10 @@ public class Paciente extends Usuario {
     @JoinColumn(name = "idInstructor")
     private Instructor instructor;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idSerieAsignada")
+    private Serie serieAsignada;
+
     public Paciente() {}
 
     public Paciente(int idUsuario, String cedula, String nombreCompleto, String correo, String contrasena,
@@ -54,6 +58,13 @@ public class Paciente extends Usuario {
         this.instructor = instructor;
     }
 
+    public Serie getSerieAsignada() {
+        return serieAsignada;
+    }
+
+    public void setSerieAsignada(Serie serieAsignada) {
+        this.serieAsignada = serieAsignada;
+    }
 
 
 

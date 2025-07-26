@@ -2,18 +2,19 @@
 <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
 	<persistence-unit name="yoga">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>modelo.entities.Usuario</class>
-        <class>modelo.entities.Paciente</class>
-        <class>modelo.entities.Instructor</class>
+		<class>model.entities.Usuario</class>
+        <class>model.entities.Paciente</class>
+        <class>model.entities.Instructor</class>
+        <class>model.entities.Postura</class>
+        <class>model.entities.Serie</class>
+        <class>model.entities.Sesion</class>
 
-
-		
 		<properties>
 			<property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://trolley.proxy.rlwy.net:10085/railway"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.password" value="QkcpWyAICQaxVPijaevrVoOxSHQCkSxu"/>
-			
+
             <property name="eclipselink.ddl-generation" value="create-tables"/>
             <property name="eclipselink.ddl-generation.output-mode" value="database"/>
             <property name="eclipselink.logging.level" value="FINE"/>

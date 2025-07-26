@@ -1,13 +1,25 @@
 package model.dao;
 
-import java.util.List;
-
 import model.entities.Postura;
 import model.entities.Serie;
+import java.util.Collections;
+import java.util.List;
 
-public interface SerieDAO {
+public class SerieDAO extends GenericDAO<Serie> {
 
-	public void crear(Serie s);
-	public List<Serie> getSeries();
-	public Postura getSiguientePostura();
+	public SerieDAO() {
+		super(Serie.class);
+	}
+
+	public void crear(Serie s) {
+		super.create(s);
+	}
+
+	public List<Serie> getSeries() {
+		return super.findAll();
+	}
+
+	public Postura getSiguientePostura() {
+		return null;
+	}
 }
