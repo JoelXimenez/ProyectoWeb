@@ -74,19 +74,19 @@ public class LoginController extends HttpServlet {
             if (usuario instanceof Instructor) {
                 resp.sendRedirect(req.getContextPath() + "/jsp/dashboard.jsp");
             } else if (usuario instanceof Paciente) {
-                resp.sendRedirect(req.getContextPath() + "/jsp/dashboardPaciente.jsp");
+                resp.sendRedirect(req.getContextPath() + "/EjecutarSesionController?route=dashboardPaciente");
             }
         } else {
             req.setAttribute("messageType", "error");
             req.setAttribute("message", "Invalid credentials. Please try again.");
-            req.getRequestDispatcher("jsp/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("jsp/iniciosesion.jsp").forward(req, resp);
         }
     }
 
     private void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
-            session.invalidate(); // Cierra la sesión actual
+            session.invalidate();
         }
         
         resp.sendRedirect(req.getContextPath() + "/jsp/inicioSesion.jsp");
