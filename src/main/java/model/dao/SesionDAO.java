@@ -2,8 +2,19 @@ package model.dao;
 
 import model.entities.Sesion;
 
-public interface SesionDAO {
+public class SesionDAO extends GenericDAO<Sesion> {
 
-	public void crear (Sesion s);
-	public void eliminar (Sesion s);
+	public SesionDAO() {
+		super(Sesion.class);
+	}
+
+	public void crear(Sesion s) {
+		super.create(s);
+	}
+
+	public void eliminar(Sesion s) {
+		if (s != null) {
+			super.remove(s.getId());
+		}
+	}
 }

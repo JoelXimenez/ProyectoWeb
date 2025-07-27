@@ -1,33 +1,48 @@
 package model.entities;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+@Entity
+@Table(name = "Serie")
 public class Serie implements Serializable {
 
-	private String id;
-	private Instructor instructor;
-	private String nombre;
-	private int numeroSesionesRecomendadas;
-	private List<Postura> posturas;
-	private int sesionesCompletadas;
-	private int sesionesTotales;
+	private static final long serialVersionUID = 1L;
 
-	public Serie() {
+	@Id
+    @Column(name = "id")
+    private String id;
 
-	}
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
 
-	public Serie(String id, Instructor instructor, String nombre, int numeroSesionesRecomendadas,
-			List<Postura> posturas, int sesionesCompletadas, int sesionesTotales) {
-		super();
-		this.id = id;
-		this.instructor = instructor;
-		this.nombre = nombre;
-		this.numeroSesionesRecomendadas = numeroSesionesRecomendadas;
-		this.posturas = posturas;
-		this.sesionesCompletadas = sesionesCompletadas;
-		this.sesionesTotales = sesionesTotales;
-	}
+    @Column(name = "numero_sesiones_recomendadas")
+    private int numeroSesionesRecomendadas;
+
+    @Column(name = "sesiones_completadas")
+    private int sesionesCompletadas;
+
+    @Column(name = "sesiones_totales")
+    private int sesionesTotales;
+
+    @ManyToOne
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor;
+
+    @ManyToMany
+    @JoinTable(
+        name = "serie_postura",
+        joinColumns = @JoinColumn(name = "serie_id"),
+        inverseJoinColumns = @JoinColumn(name = "postura_id")
+    )
+    private List<Postura> posturas;
+
+    @OneToMany(mappedBy = "serie")
+    private List<Sesion> sesiones;
+
+    public Serie() {}
+    // Constructor, getters y setters...
 
 	public String getId() {
 		return id;
@@ -35,14 +50,6 @@ public class Serie implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public Instructor getInstructor() {
-		return instructor;
-	}
-
-	public void setInstructor(Instructor instructor) {
-		this.instructor = instructor;
 	}
 
 	public String getNombre() {
@@ -61,14 +68,6 @@ public class Serie implements Serializable {
 		this.numeroSesionesRecomendadas = numeroSesionesRecomendadas;
 	}
 
-	public List<Postura> getPosturas() {
-		return posturas;
-	}
-
-	public void setPosturas(List<Postura> posturas) {
-		this.posturas = posturas;
-	}
-
 	public int getSesionesCompletadas() {
 		return sesionesCompletadas;
 	}
@@ -85,4 +84,40 @@ public class Serie implements Serializable {
 		this.sesionesTotales = sesionesTotales;
 	}
 
+	public Instructor getInstructor() {
+		return instructor;
+	}
+
+	public void setInstructor(Instructor instructor) {
+		this.instructor = instructor;
+	}
+
+	public List<Postura> getPosturas() {
+		return posturas;
+	}
+
+	public void setPosturas(List<Postura> posturas) {
+		this.posturas = posturas;
+	}
+
+	public List<Sesion> getSesiones() {
+		return sesiones;
+	}
+
+	public void setSesiones(List<Sesion> sesiones) {
+		this.sesiones = sesiones;
+	}
+	public Serie(String id, String nombre, int numeroSesionesRecomendadas, int sesionesCompletadas, int sesionesTotales,
+			Instructor instructor, List<Postura> posturas, List<Sesion> sesiones) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.numeroSesionesRecomendadas = numeroSesionesRecomendadas;
+		this.sesionesCompletadas = sesionesCompletadas;
+		this.sesionesTotales = sesionesTotales;
+		this.instructor = instructor;
+		this.posturas = posturas;
+		this.sesiones = sesiones;
+	}
+    
 }

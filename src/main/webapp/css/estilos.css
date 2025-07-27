@@ -40,6 +40,14 @@ body, html {
   flex-direction: column;
   justify-content: center;
 }
+.campo-formulario {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
 
 .titulo-logo {
   font-family: 'Qwitcher Grypen', cursive;
@@ -377,4 +385,145 @@ padding: 0px; margin-top: 0px; margin-bottom: 0px;}
     margin: 0.2rem 0;
   }
   .fondo { background-attachment: scroll; }
+}
+
+.selector-archivo {
+  position: relative;
+  display: inline-block;
+  background-color: var(--color4);
+  padding: 0;
+  border-radius: 8px;
+}
+
+
+.selector-archivo label {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* El botón visual que se ve */
+.btn-archivo {
+  background-color: var(--color3);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  border: none;
+}
+
+.btn-archivo:hover {
+  background-color: var(--color2);
+}
+
+
+
+
+
+.boton-archivo {
+  background-color: var(--color3);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.boton-archivo:hover {
+  background-color: var(--color2);
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background-color: var(--color3);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+  background-color: var(--color2);
+}
+
+
+
+.selector-archivo::before {
+  content: "Seleccionar archivo";
+
+}
+
+.selector-archivo:hover::before {
+  background-color: var(--color2);
+}
+
+.selector-archivo .nombre-archivo {
+  font-style: italic;
+  color: var(--color1);
+  font-size: 0.95rem;
+}
+
+/* Estilo blanco del label */
+.labeld {
+  color: white;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+
+
+
+
+
+/* ====== ESTILO PARA FORMULARIOS ====== */
+.formulario-paciente input,
+.formulario-paciente select {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.formulario-paciente input:focus,
+.formulario-paciente select:focus {
+  outline: 2px solid var(--color3);
+  border-color: var(--color3);
+  background-color: white;
+}
+
+.formulario-paciente label {
+  display: block;
+  margin: 0.6rem 0 0.4rem;
+  font-weight: 600;
+  color: var(--color1);
+}
+
+.fila-doble {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.fila-doble > * {
+  flex: 1;
+}
+/* === Solo para la vista de registro de instructores === */
+.sin-scroll {
+  overflow: hidden;       /* Elimina la barra de desplazamiento */
+  height: 100vh;          /* Asegura que ocupe el alto completo */
 }
