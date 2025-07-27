@@ -22,4 +22,10 @@ public class InstructorDAO extends GenericDAO<Instructor> {
             return null; // Handle other exceptions as needed
         }
     }
+    
+    @Override
+    public boolean create(Instructor entity) {
+        return super.create(entity);
+    }
+
 }
