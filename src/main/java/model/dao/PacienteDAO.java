@@ -46,6 +46,19 @@ public class PacienteDAO extends GenericDAO<Paciente> {
     public boolean create(Paciente entity) {
         return super.create(entity);
     }
+
+        @Override
+    public Paciente findById(Object id) {
+        // TODO Auto-generated method stub
+        return super.findById(id);
+    }
+
+    @Override
+    public boolean update(Paciente entity) {
+        // TODO Auto-generated method stub
+        return super.update(entity);
+    }
+
     
     public boolean tieneSerieAsignada(String pacienteId) {
         try (EntityManager em = getEntityManager()) {

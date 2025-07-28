@@ -44,12 +44,19 @@ public class GestionarPacienteController extends HttpServlet {
             case "listarPacientes":
                 this.listarPacientes(req, resp);
                 break;
+            case "editarPaciente":
+                this.editarPaciente(req, resp);
+                break;
+            case "guardarPacienteExistente":
+                this.guardarPacienteExistente(req, resp);
+                break;
             default:
                 throw new IllegalArgumentException("Ruta no encontrada: " + route);
         }
     }
 
-    private void listarPacientes(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void listarPacientes(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         Instructor instructor = (Instructor) session.getAttribute("usuario");
 
@@ -67,11 +74,47 @@ public class GestionarPacienteController extends HttpServlet {
         }
     }
 
+    private void editarPaciente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        PacienteService pacienteService = new PacienteService();
+        Paciente paciente = pacienteService.buscarPacientePorId(id);
+
+        // Formatear fecha de nacimiento
+        String fechaFormateada = "";
+        if (paciente.getFechaNacimiento() != null) {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+            fechaFormateada = sdf.format(paciente.getFechaNacimiento());
+        }
+
+        // Enviar atributos al JSP
+        req.setAttribute("paciente", paciente);
+        req.setAttribute("fechaNacimientoFormateada", fechaFormateada);
+        req.getRequestDispatcher("view/EDITAR_PACIENTE_FORM.jsp").forward(req, resp);
+    }
+
+    private void guardarPacienteExistente(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        Paciente paciente = parsePacienteFromRequest(req);
+        PacienteService pacienteService = new PacienteService();
+        if (pacienteService.guardarExistente(paciente)) {
+            HttpSession session = req.getSession();
+            session.setAttribute("messageType", "info");
+            session.setAttribute("message", "Paciente actualizado exitosamente.");
+            resp.sendRedirect(req.getContextPath() + "/GestionarPacienteController?route=listarPacientes");
+        } else {
+            HttpSession session = req.getSession();
+            session.setAttribute("messageType", "error");
+            session.setAttribute("message", "Error al actualizar paciente.");
+            resp.sendRedirect(req.getContextPath() + "/GestionarPacienteController?route=listarPacientes");
+        }
+    }
+
     private void registrarPacienteFormulario(HttpServletResponse resp) throws IOException {
         resp.sendRedirect("view/registroPaciente.jsp");
     }
 
-    private void registrarPaciente(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void registrarPaciente(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         try {
             Paciente paciente = parsePacienteFromRequest(req);
             PacienteService pacienteService = new PacienteService();
@@ -109,9 +152,8 @@ public class GestionarPacienteController extends HttpServlet {
             Date fechaNacimiento = java.sql.Date.valueOf(fechaNacimientoLD);
 
             return new Paciente(
-                id, nombre, correo, telefono, contrasena, fechaNacimiento,
-                genero, instructor, null, null
-            );
+                    id, nombre, correo, telefono, contrasena, fechaNacimiento,
+                    genero, instructor, null, null);
         } catch (Exception e) {
             throw new ServletException("Error al parsear los datos del formulario.", e);
         }
