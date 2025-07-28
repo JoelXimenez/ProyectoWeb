@@ -17,7 +17,7 @@
   <div class="menu-lateral">
     <a href="${pageContext.request.contextPath}/jsp/dashboard.jsp" class="btn-menu activo">Dashboard</a>
     <a href="${pageContext.request.contextPath}/GestionarPacienteController?route=listarPacientes" class="btn-menu">Gestionar pacientes</a>
-    <a href="#" class="btn-menu">Crear serie terapéutica</a>
+    <a href="${pageContext.request.contextPath}/CrearSerieTerapeuticaController?route=" class="btn-menu">Crear serie terapéutica</a>
     <a href="#" class="btn-menu">Asignar serie</a>
   </div>
   <div class="contenido-panel">

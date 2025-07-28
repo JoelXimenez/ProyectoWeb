@@ -1,7 +1,14 @@
 package model.service;
 
+import model.conexion.ConexionBD;
 import model.dao.PosturaDAO;
 import model.entities.Postura;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PosturaService {
@@ -22,6 +29,8 @@ public class PosturaService {
     public List<Postura> buscarTodas() {
         return posturaDAO.findAll();
     }
+    
+    
 
     public boolean actualizar(Postura postura) {
         return posturaDAO.update(postura);
