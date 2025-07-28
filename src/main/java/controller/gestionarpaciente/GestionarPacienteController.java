@@ -50,9 +50,21 @@ public class GestionarPacienteController extends HttpServlet {
             case "guardarPacienteExistente":
                 this.guardarPacienteExistente(req, resp);
                 break;
+            case "verHistorial":
+                this.verHistorial(req, resp);
+                break;
             default:
                 throw new IllegalArgumentException("Ruta no encontrada: " + route);
         }
+    }
+
+    private void verHistorial(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        PacienteService pacienteService = new PacienteService();
+        Paciente paciente = pacienteService.buscarHistorialPorIdPaciente(id);
+
+        req.setAttribute("paciente", paciente);
+        req.getRequestDispatcher("view/HISTORIAL_PACIENTE_FORM.jsp").forward(req, resp);
     }
 
     private void listarPacientes(HttpServletRequest req, HttpServletResponse resp)

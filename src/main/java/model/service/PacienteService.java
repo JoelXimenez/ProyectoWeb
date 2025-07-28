@@ -39,4 +39,8 @@ public class PacienteService {
         return pacienteDAO.findById(id);
     }
 
+    public Paciente buscarHistorialPorIdPaciente(String id) {
+        return pacienteDAO.findHistorialById(id);
+    }
+
 }

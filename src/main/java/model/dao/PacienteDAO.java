@@ -27,7 +27,8 @@ public class PacienteDAO extends GenericDAO<Paciente> {
     }
 
     /**
-     * ✅ CORREGIDO: Método recomendado para obtener pacientes por cédula del instructor
+     * ✅ CORREGIDO: Método recomendado para obtener pacientes por cédula del
+     * instructor
      */
     public List<Paciente> getPacientesByInstructor(String cedulaInstructor) {
         try (EntityManager em = getEntityManager()) {
@@ -41,13 +42,27 @@ public class PacienteDAO extends GenericDAO<Paciente> {
         }
     }
 
+    public Paciente findHistorialById(String id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT p FROM Paciente p LEFT JOIN FETCH p.historialSesiones WHERE p.id = :id",
+                    Paciente.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 
     @Override
     public boolean create(Paciente entity) {
         return super.create(entity);
     }
 
-        @Override
+    @Override
     public Paciente findById(Object id) {
         // TODO Auto-generated method stub
         return super.findById(id);
@@ -59,7 +74,6 @@ public class PacienteDAO extends GenericDAO<Paciente> {
         return super.update(entity);
     }
 
-    
     public boolean tieneSerieAsignada(String pacienteId) {
         try (EntityManager em = getEntityManager()) {
             Paciente paciente = em.find(Paciente.class, pacienteId);
@@ -69,7 +83,6 @@ public class PacienteDAO extends GenericDAO<Paciente> {
             return false;
         }
     }
-
 
     public boolean guardarSerie(String pacienteId, String serieId) {
         EntityManager em = getEntityManager();
@@ -98,15 +111,17 @@ public class PacienteDAO extends GenericDAO<Paciente> {
             em.close();
         }
     }
+
     public Paciente getPacienteConSerieYPosturas(String pacienteId) {
         try (EntityManager em = getEntityManager()) {
             return em.createQuery(
-                "SELECT p FROM Paciente p " +
-                "LEFT JOIN FETCH p.serieAsignada s " +
-                "LEFT JOIN FETCH s.posturas " +
-                "WHERE p.id = :id", Paciente.class)
-                .setParameter("id", pacienteId)
-                .getSingleResult();
+                    "SELECT p FROM Paciente p " +
+                            "LEFT JOIN FETCH p.serieAsignada s " +
+                            "LEFT JOIN FETCH s.posturas " +
+                            "WHERE p.id = :id",
+                    Paciente.class)
+                    .setParameter("id", pacienteId)
+                    .getSingleResult();
         } catch (NoResultException e) {
             return null;
         } catch (Exception e) {
@@ -114,7 +129,5 @@ public class PacienteDAO extends GenericDAO<Paciente> {
             return null;
         }
     }
-
-
 
 }
