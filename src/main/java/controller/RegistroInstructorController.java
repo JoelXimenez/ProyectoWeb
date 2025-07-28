@@ -52,8 +52,10 @@ public class RegistroInstructorController extends HttpServlet {
 
         // Verifica si ya existe un instructor con ese correo
         if (instructorDAO.findByCorreo(instructor.getCorreo()) != null) {
-            req.setAttribute("mensaje", "Ya existe un instructor con ese correo");
-            req.getRequestDispatcher("jsp/registroInstructor.jsp").forward(req, resp);
+            HttpSession session = req.getSession();
+            session.setAttribute("messageType", "info");
+            session.setAttribute("message", "Ya existe un instructor con ese correo.");
+            resp.sendRedirect(req.getContextPath() + "/jsp/inicioSesion.jsp");
         } else {
             boolean creado = instructorDAO.create(instructor);
             if (creado) {
@@ -62,8 +64,10 @@ public class RegistroInstructorController extends HttpServlet {
             session.setAttribute("message", "Instructor registrado exitosamente.");
             resp.sendRedirect(req.getContextPath() + "/jsp/inicioSesion.jsp");
             } else {
-                req.setAttribute("mensaje", "Error al registrar el instructor");
-                req.getRequestDispatcher("jsp/registroInstructor.jsp").forward(req, resp);
+                HttpSession session = req.getSession();
+                session.setAttribute("messageType", "info");
+                session.setAttribute("message", "Error al registrar el instructor.");
+                resp.sendRedirect(req.getContextPath() + "/jsp/inicioSesion.jsp");
             }
         }
     }
