@@ -22,7 +22,7 @@
 		<div class="menu-lateral">
 			<button class="btn-menu" onclick="location.href='view/dashboard.jsp'">Dashboard</button>
 			<button class="btn-menu activo">Gestionar pacientes</button>
-			<button class="btn-menu" onclick="location.href='../crearSerie.html'">Crear
+			<button class="btn-menu" onclick="location.href='${pageContext.request.contextPath}/CrearSerieTerapeuticaController?route=crearSerie'">Crear
 				serie terapéutica</button>
 			<button class="btn-menu"
 				onclick="location.href='${pageContext.request.contextPath}/AsignarSerieController?route=listar'">Asignar

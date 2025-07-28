@@ -25,7 +25,7 @@
 			<button class="btn-menu"
 				onclick="location.href='${pageContext.request.contextPath}/GestionarPacienteController?route=listarPacientes'">
 				Gestionar pacientes</button>
-			<button class="btn-menu" onclick="location.href='../crearSerie.html'">Crear
+			<button class="btn-menu" onclick="location.href='${pageContext.request.contextPath}/CrearSerieTerapeuticaController?route=crearSerie'">Crear
 				serie terapéutica</button>
 			<button class="btn-menu"
 				onclick="location.href='${pageContext.request.contextPath}/AsignarSerieController?route=listar'">Asignar

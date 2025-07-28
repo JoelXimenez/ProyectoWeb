@@ -36,7 +36,6 @@
         <button type="submit" name="rol" value="administrador" class="btn btn-secundario btn-rol">Entrar como Administrador</button>
       </div>
       <p class="enlace-registro">¿Eres instructor y no tienes cuenta? <a href="${pageContext.request.contextPath}/RegistroInstructorController?route=registrarInstructor">Regístrate aquí</a></p>
-      <p class="enlace-registro">¿Eres un paciente nuevo? <a href="activarCuenta.html">Activa tu cuenta aquí</a></p>
     </form>
   </div>
 </div>
