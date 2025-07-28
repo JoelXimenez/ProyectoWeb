@@ -68,6 +68,42 @@
 					</div>
 				</div>
 			</div>
+			<!-- Modal para mensajes informativos y de error -->
+			<div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content border-0">
+						<div class="modal-body bg-info text-white text-center rounded">
+							<i class="fas fa-info-circle fa-2x me-2"></i>
+							<!-- Mostrar el mensaje en HTML -->
+							<span class="fs-5">
+								${message}
+							</span>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script>
+				window.onload = function () {
+					const message = "${message}";
+					if (message !== "") {
+						const infoModalElement = document.getElementById("infoModal");
+						if (infoModalElement) {
+							const modalInstance = new bootstrap.Modal(infoModalElement);
+							modalInstance.show();
+
+							// Cerrar automáticamente después de 2 segundos (2000 milisegundos)
+							setTimeout(() => {
+								modalInstance.hide();
+							}, 2000);
+						}
+					}
+				};
+			</script>
+
+
+
 		</body>
 
 		</html>

@@ -132,15 +132,20 @@ public class GestionarPacienteController extends HttpServlet {
             PacienteService pacienteService = new PacienteService();
 
             if (pacienteService.guardar(paciente)) {
+                HttpSession session = req.getSession();
+                session.setAttribute("messageType", "info");
+                session.setAttribute("message", "Paciente creado exitosamente.");
                 resp.sendRedirect(req.getContextPath() + "/GestionarPacienteController?route=listarPacientes");
             } else {
-                req.setAttribute("mensaje", "❌ Error al registrar paciente.");
-                req.getRequestDispatcher("view/registroPaciente.jsp").forward(req, resp);
+                HttpSession session = req.getSession();
+                session.setAttribute("messageType", "error");
+                session.setAttribute("message", "Error al registrar paciente.");
+                resp.sendRedirect(req.getContextPath() + "/GestionarPacienteController?route=listarPacientes");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            req.setAttribute("mensaje", "❌ Error al procesar los datos del paciente.");
+            req.setAttribute("mensaje", "Error al procesar los datos del paciente.");
             req.getRequestDispatcher("view/registroPaciente.jsp").forward(req, resp);
         }
     }
