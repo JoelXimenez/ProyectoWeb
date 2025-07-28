@@ -23,18 +23,15 @@
 					required> <input type="email" name="correo"
 					placeholder="Correo electrónico" required> <input
 					type="password" name="password" placeholder="Contraseña" required>
-				<input type="text" name="telefono" placeholder="Teléfono"> <label
-					for="documento" class="labeld" style="color: white">Documento
-					de certificación (PDF, JPG)</label> <input type="file" name="documento"
-					id="documento" accept=".pdf,.jpg,.jpeg,.png" required>
+				<input type="text" name="telefono" placeholder="Teléfono">
+				 <label for="documento" class="labeld" style="color: white">Documento de certificación (PDF, JPG)</label> 
+				 <input type="file" name="documento" id="documento" accept=".pdf,.jpg,.jpeg,.png" required>
 
 				<button type="submit" class="btn btn-primario">Registrarme
 					como Instructor</button>
 
 				<p class="enlace-login">
-					¿Ya tienes cuenta? <a
-						href="${pageContext.request.contextPath}/view/inicioSesion.jsp">Inicia
-						sesión</a>
+					¿Ya tienes cuenta? <a href="${pageContext.request.contextPath}/RegistroInstructorController?route=regresar">Inicia sesión</a>
 
 				</p>
 			</form>
