@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>${tituloFormulario} - Equilibrio Vital</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
 </head>
 <body class="dashboard">
 <div class="barra">
@@ -14,13 +14,6 @@
     <button class="btn-cerrar-sesion" onclick="location.href='${pageContext.request.contextPath}/LoginController?route=logOut'">Cerrar sesión</button>
 </div>
 <div class="panel">
-    <div class="menu-lateral">
-        <a href="${pageContext.request.contextPath}/jsp/dashboard.jsp" class="btn-menu">Dashboard</a>
-        <a href="${pageContext.request.contextPath}/GestionarPacienteController?route=listarPacientes" class="btn-menu">Gestionar pacientes</a>
-        <a href="${pageContext.request.contextPath}/GestionarPosturasController?route=listar" class="btn-menu activo">Gestionar posturas</a>
-        <a href="#" class="btn-menu">Crear serie terapéutica</a>
-        <a href="#" class="btn-menu">Asignar serie</a>
-    </div>
     <div class="contenido-panel">
         <div class="tarjeta">
             <!-- Breadcrumb -->
@@ -112,8 +105,16 @@
                         <img id="imagen-preview" src="" alt="Vista previa" style="max-width: 200px; max-height: 200px; border-radius: 8px; border: 1px solid #e2e8f0;">
                     </div>
                 </div>
+<div class="form-group">
+    <label for="activa">
+        <input type="checkbox" id="activa" name="activa" value="true"
+               <c:if test="${postura != null && postura.activa}">checked</c:if>> 
+        Postura activa
+    </label>
+</div>
 
                 <div class="acciones-formulario">
+                
                     <a href="${pageContext.request.contextPath}/GestionarPosturasController?route=listar" 
                        class="btn btn-secundario">Cancelar</a>
                     <button type="submit" class="btn btn-primario" id="btn-guardar">

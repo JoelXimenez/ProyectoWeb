@@ -11,8 +11,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import model.dao.PacienteDAO;
+import model.entities.Administrador;
 import model.entities.Instructor;
 import model.entities.Paciente;
+import model.service.AdministradorService;
 import model.service.InstructorService;
 import model.service.PacienteService;
 
@@ -82,7 +84,17 @@ public class LoginController extends HttpServlet {
                     return;
                 }
             }
+        }else if ("administrador".equalsIgnoreCase(rol)) {
+            AdministradorService administradorService = new AdministradorService();
+            Administrador administrador = administradorService.authenticate(correo, contrasena);
+            if (administrador != null) {
+                session.setAttribute("administrador", administrador);
+                resp.sendRedirect(req.getContextPath() + "/GestionarPosturasController?route=listar");
+                return;
+            }
         }
+
+
 
         req.setAttribute("messageType", "error");
         req.setAttribute("message", "Credenciales inválidas. Intenta de nuevo.");

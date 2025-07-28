@@ -34,90 +34,90 @@ public class Postura implements Serializable {
     @Column(name = "duracion")
     private int duracion;
 
-    // Constructor, getters y setters...
+    @Column(name = "activa")
+    private boolean activa;
 
-	public Postura(int id, String nombre, String fotoUrl, String videoUrl, String instrucciones, String beneficios, int duracion) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.fotoUrl = fotoUrl;
-		this.videoUrl = videoUrl;
-		this.instrucciones = instrucciones;
-		this.beneficios = beneficios;
-		this.duracion = duracion;
-	}
+    // Constructores
 
+    public Postura() {
+        super();
+    }
 
-	public Postura() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public Postura(int id, String nombre, String fotoUrl, String videoUrl,
+                   String instrucciones, String beneficios, int duracion, boolean activa) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fotoUrl = fotoUrl;
+        this.videoUrl = videoUrl;
+        this.instrucciones = instrucciones;
+        this.beneficios = beneficios;
+        this.duracion = duracion;
+        this.activa = activa;
+    }
 
+    // Getters y Setters
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
 
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public String getVideoUrl() {
+        return videoUrl;
+    }
 
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
 
-	public String getFotoUrl() {
-		return fotoUrl;
-	}
+    public String getInstrucciones() {
+        return instrucciones;
+    }
 
+    public void setInstrucciones(String instrucciones) {
+        this.instrucciones = instrucciones;
+    }
 
-	public void setFotoUrl(String fotoUrl) {
-		this.fotoUrl = fotoUrl;
-	}
+    public String getBeneficios() {
+        return beneficios;
+    }
 
+    public void setBeneficios(String beneficios) {
+        this.beneficios = beneficios;
+    }
 
-	public String getVideoUrl() {
-		return videoUrl;
-	}
+    public int getDuracion() {
+        return duracion;
+    }
 
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
 
-	public void setVideoUrl(String videoUrl) {
-		this.videoUrl = videoUrl;
-	}
+    public boolean isActiva() {
+        return activa;
+    }
 
-
-	public String getInstrucciones() {
-		return instrucciones;
-	}
-
-
-	public void setInstrucciones(String instrucciones) {
-		this.instrucciones = instrucciones;
-	}
-	
-	public int getDuracion() {
-	    return duracion;
-	}
-
-	public void setDuracion(int duracion) {
-	    this.duracion = duracion;
-	}
-
-	public String getBeneficios() {
-		return beneficios;
-	}
-
-
-	public void setBeneficios(String beneficios) {
-		this.beneficios = beneficios;
-	}
-    
+    public void setActiva(boolean activa) {
+        this.activa = activa;
+    }
 }
